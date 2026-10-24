@@ -17,6 +17,7 @@ from flask import (
     Flask, render_template, request, redirect, url_for,
     session, jsonify, send_from_directory, abort
 )
+import jinja2
 from werkzeug.security import generate_password_hash, check_password_hash
 
 import ai_engine
@@ -28,7 +29,12 @@ RECIPES_FILE = os.path.join(BASE_DIR, 'recipes_db.json')
 MESSAGES_FILE = os.path.join(BASE_DIR, 'messages_db.json')
 SECRET_KEY_FILE = os.path.join(BASE_DIR, '.secret_key')
 
-app = Flask(__name__, template_folder='templates', static_folder='.')
+# Support templates in either ./templates or the root repository folder
+app = Flask(__name__, static_folder='.')
+app.jinja_loader = jinja2.ChoiceLoader([
+    jinja2.FileSystemLoader(os.path.join(BASE_DIR, 'templates')),
+    jinja2.FileSystemLoader(BASE_DIR)
+])
 
 # -------------------------------------------------------------
 # SESSION SECURITY CONFIGURATION
