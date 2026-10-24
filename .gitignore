@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+.secret_key
+.env
+.venv/
+env/
+*token*
+*.log

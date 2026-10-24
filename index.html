@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <title>VimShi Cooking | Authentic Recipes, Zero-Oil Innovations & Creative Baking</title>
+  
+  <!-- Meta tags for SEO & Social Sharing -->
+  <meta name="description" content="Official website of VimShi Cooking. Discover authentic homemade recipes, festival sweets, zero-oil healthy breakfasts, and eggless baking with step-by-step videos." />
+  <meta name="keywords" content="VimShi Cooking, Indian Recipes, Zero Oil Dosa, Rabdi Kheer, Himachali Siddu, Eggless Brownies, Healthy Food, YouTube Cooking Channel" />
+  <meta property="og:title" content="VimShi Cooking - Where Tradition Meets Innovation" />
+  <meta property="og:description" content="Explore 1,200+ recipes, festival specials, and healthy innovations by Chef VimShi." />
+  
+  <!-- Favicon using channel avatar -->
+  <link rel="icon" type="image/png" href="https://yt3.googleusercontent.com/dV_NHfyFB_A9rwbWwd-zGpNseeY-WozgBLVc4XZHpnxZnuKClarYzU-NGe5YVBESV15f6V-BfQ=s160-c-k-c0x00ffffff-no-rj" />
+
+  <!-- Google Fonts: Playfair Display & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['Playfair Display', 'serif'],
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#fff7ed',
+              100: '#ffedd5',
+              200: '#fed7aa',
+              500: '#f97316',
+              600: '#ea580c',
+              700: '#c2410c',
+              800: '#9a3412',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body class="bg-slate-50 text-slate-800 dark:bg-slate-900 dark:text-slate-100 font-sans antialiased selection:bg-orange-500 selection:text-white transition-colors duration-200">
+
+  <!-- ========================================================= -->
+  <!-- NAVIGATION BAR (RESPONSIVE) -->
+  <!-- ========================================================= -->
+  <header class="fixed top-0 left-0 right-0 z-40 glass-nav border-b border-slate-200/80 dark:border-slate-800 shadow-sm transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16 sm:h-20">
+        
+        <!-- Brand Logo -->
+        <a href="#hero" class="flex items-center gap-2.5 sm:gap-3 group">
+          <div class="relative w-9 h-9 sm:w-11 sm:h-11 rounded-full p-0.5 bg-gradient-to-tr from-amber-500 via-orange-500 to-rose-600 shadow-md group-hover:scale-105 transition-transform shrink-0">
+            <img id="navAvatar" src="https://yt3.googleusercontent.com/dV_NHfyFB_A9rwbWwd-zGpNseeY-WozgBLVc4XZHpnxZnuKClarYzU-NGe5YVBESV15f6V-BfQ=s160-c-k-c0x00ffffff-no-rj" 
+                 alt="VimShi Cooking Logo" class="w-full h-full object-cover rounded-full" />
+          </div>
+          <div>
+            <span class="font-serif font-black text-lg sm:text-2xl tracking-tight text-slate-900 dark:text-white flex items-center gap-1">
+              <span>VimShi</span>
+              <span class="text-brand-gradient">Cooking</span>
+            </span>
+            <span class="hidden sm:block text-[10px] font-semibold tracking-widest uppercase text-amber-600 dark:text-amber-400">
+              Kitchen • Baking • Innovation
+            </span>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation Links -->
+        <nav class="hidden md:flex items-center gap-6 lg:gap-8 text-sm font-semibold text-slate-600 dark:text-slate-300">
+          <a href="#hero" class="hover:text-orange-600 dark:hover:text-orange-400 transition-colors">Home</a>
+          <a href="#spotlight" class="hover:text-orange-600 dark:hover:text-orange-400 transition-colors">Spotlight</a>
+          <a href="#recipes" class="hover:text-orange-600 dark:hover:text-orange-400 transition-colors">Recipes</a>
+          <a href="#videos" class="hover:text-orange-600 dark:hover:text-orange-400 transition-colors">Video Gallery</a>
+          <a href="#about" class="hover:text-orange-600 dark:hover:text-orange-400 transition-colors">About</a>
+          <a href="#social" class="hover:text-orange-600 dark:hover:text-orange-400 transition-colors">Socials</a>
+          <a href="#contact" class="hover:text-orange-600 dark:hover:text-orange-400 transition-colors">Contact</a>
+        </nav>
+
+        <!-- Right Side Controls -->
+        <div class="flex items-center gap-2 sm:gap-3">
+          
+          <!-- Admin Portal Quick Access Lock Button -->
+          <a href="/admin" title="Admin Portal" 
+             class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-slate-100 hover:bg-orange-50 dark:bg-slate-800 dark:hover:bg-slate-700 flex items-center justify-center transition-colors text-slate-600 dark:text-slate-300 group">
+            <i class="fa-solid fa-lock text-xs sm:text-sm text-amber-500 group-hover:text-orange-600 transition-colors"></i>
+          </a>
+
+          <!-- Dark / Light Theme Toggle -->
+          <button id="themeToggleBtn" aria-label="Toggle theme" 
+                  class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 flex items-center justify-center transition-colors">
+            <i id="themeToggleIcon" class="fa-solid fa-moon text-slate-600 text-sm sm:text-base"></i>
+          </button>
+
+          <!-- YouTube 1-Click Subscribe Button -->
+          <a href="https://youtube.com/@vimshicooking?si=TqQQ_rovL1YyC3ep" target="_blank" rel="noopener noreferrer"
+             class="yt-channel-link hidden sm:inline-flex items-center gap-2 px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-xl bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs uppercase tracking-wider shadow-md hover:shadow-lg transition-all active:scale-95">
+            <i class="fa-brands fa-youtube text-sm sm:text-base"></i>
+            <span>Subscribe</span>
+          </a>
+
+          <!-- Mobile Menu Hamburger Button -->
+          <button id="mobileMenuBtn" aria-label="Open menu" 
+                  class="md:hidden w-9 h-9 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-700 dark:text-slate-200">
+            <i class="fa-solid fa-bars text-base"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Dropdown Navigation -->
+      <div id="mobileMenu" class="hidden md:hidden pb-5 pt-2 border-t border-slate-200 dark:border-slate-800 flex flex-col gap-2 font-medium text-slate-700 dark:text-slate-300">
+        <a href="#hero" class="px-3 py-2 rounded-lg hover:bg-orange-50 dark:hover:bg-slate-800 text-sm">Home</a>
+        <a href="#spotlight" class="px-3 py-2 rounded-lg hover:bg-orange-50 dark:hover:bg-slate-800 text-sm">Spotlight Recipe</a>
+        <a href="#recipes" class="px-3 py-2 rounded-lg hover:bg-orange-50 dark:hover:bg-slate-800 text-sm">Interactive Recipes</a>
+        <a href="#videos" class="px-3 py-2 rounded-lg hover:bg-orange-50 dark:hover:bg-slate-800 text-sm">Video Gallery</a>
+        <a href="#about" class="px-3 py-2 rounded-lg hover:bg-orange-50 dark:hover:bg-slate-800 text-sm">About Chef VimShi</a>
+        <a href="#social" class="px-3 py-2 rounded-lg hover:bg-orange-50 dark:hover:bg-slate-800 text-sm">Social Media</a>
+        <a href="#contact" class="px-3 py-2 rounded-lg hover:bg-orange-50 dark:hover:bg-slate-800 text-sm">Contact & Requests</a>
+        <a href="/admin" class="px-3 py-2 rounded-lg hover:bg-orange-50 dark:hover:bg-slate-800 text-sm flex items-center gap-2 text-amber-500 font-semibold">
+          <i class="fa-solid fa-lock text-xs"></i> Admin Dashboard
+        </a>
+        <a href="https://youtube.com/@vimshicooking?si=TqQQ_rovL1YyC3ep" target="_blank" rel="noopener noreferrer"
+           class="yt-channel-link mt-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-rose-600 text-white font-bold text-xs uppercase tracking-wider">
+          <i class="fa-brands fa-youtube"></i> Subscribe on YouTube
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="pt-16 sm:pt-20">
+
+    <!-- ========================================================= -->
+    <!-- HERO SECTION -->
+    <!-- ========================================================= -->
+    <section id="hero" class="relative overflow-hidden pt-6 pb-16 sm:pt-12 sm:pb-20 lg:pt-16 lg:pb-28">
+      
+      <!-- Subtle Decorative Background Circles -->
+      <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] sm:w-[600px] h-[350px] sm:h-[600px] bg-gradient-to-tr from-amber-400/15 via-orange-400/15 to-rose-400/10 rounded-full blur-3xl pointer-events-none -z-10"></div>
+      
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <!-- Channel Banner Card -->
+        <div class="relative w-full h-44 sm:h-64 md:h-80 rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl mb-6 sm:mb-8 group">
+          <img id="heroBannerImg" 
+               src="https://yt3.googleusercontent.com/39gFZ58g2mTnTknjMgv63ciH6EQuxo7cBqivAxsS1fp_HM_hkO1AXvETQHOxy0juqXrFflyz5w=w2560-fcrop64=1,00005a57ffffa5a8-k-c0xffffffff-no-nd-rj" 
+               alt="VimShi Cooking Channel Banner" 
+               class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/45 to-transparent"></div>
+          
+          <!-- Banner Badge & Channel Title -->
+          <div class="absolute bottom-3 left-3 sm:bottom-6 sm:left-6 right-3 flex items-center gap-3 sm:gap-4 text-white">
+            <div class="relative w-14 h-14 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-full p-1 bg-gradient-to-tr from-amber-400 to-rose-500 shadow-2xl warm-glow shrink-0">
+              <img id="heroAvatarImg" 
+                   src="https://yt3.googleusercontent.com/dV_NHfyFB_A9rwbWwd-zGpNseeY-WozgBLVc4XZHpnxZnuKClarYzU-NGe5YVBESV15f6V-BfQ=s160-c-k-c0x00ffffff-no-rj" 
+                   alt="VimShi Avatar" 
+                   class="w-full h-full object-cover rounded-full" />
+            </div>
+            <div>
+              <div class="flex items-center gap-1.5 sm:gap-2">
+                <h1 class="text-lg sm:text-3xl md:text-4xl font-serif font-black hero-banner-title">VimShi Cooking</h1>
+                <span class="inline-flex items-center text-blue-400 text-xs sm:text-base" title="Verified Creator">
+                  <i class="fa-solid fa-circle-check"></i>
+                </span>
+              </div>
+              <p class="text-[11px] sm:text-sm text-amber-200 font-medium">@VimShiCooking • 1.2K+ Videos Created</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hero Content Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          
+          <div class="lg:col-span-8 space-y-4 sm:space-y-6">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-100 dark:bg-orange-950/50 text-orange-700 dark:text-orange-300 text-xs sm:text-sm font-bold">
+              <i class="fa-solid fa-sparkles text-amber-500"></i> Pure Vegetarian • Homemade • Innovative
+            </div>
+
+            <h2 class="text-2xl sm:text-4xl lg:text-5xl font-serif font-extrabold tracking-tight text-slate-900 dark:text-white leading-[1.2]">
+              Where <span class="text-brand-gradient">Traditional Flavors</span> Meet Kitchen Innovation
+            </h2>
+
+            <p id="heroBioText" class="text-slate-600 dark:text-slate-300 text-sm sm:text-base lg:text-lg leading-relaxed max-w-2xl font-normal">
+              Welcome to VimShi Cooking! Explore a world of both cooking and baking with our unique and innovative recipes. From delicious dishes to creative cakes, we bring you a variety of flavors to inspire your culinary journey.
+            </p>
+
+            <!-- Quick Action CTA Buttons -->
+            <div class="flex flex-wrap items-center gap-3 pt-1">
+              <a href="#recipes" 
+                 class="w-full sm:w-auto px-6 py-3.5 bg-gradient-to-r from-orange-600 to-amber-600 hover:from-orange-700 hover:to-amber-700 text-white font-bold rounded-2xl shadow-lg shadow-orange-500/25 transition-all text-center flex items-center justify-center gap-2 text-sm">
+                <i class="fa-solid fa-utensils"></i> Explore Recipe Library
+              </a>
+              <a href="#videos" 
+                 class="w-full sm:w-auto px-6 py-3.5 bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-100 font-bold rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm transition-all text-center flex items-center justify-center gap-2 text-sm">
+                <i class="fa-solid fa-play text-rose-600"></i> Watch 30+ Videos
+              </a>
+            </div>
+
+            <!-- Social Media Badges -->
+            <div class="pt-3 flex flex-wrap items-center gap-2 sm:gap-3 text-xs">
+              <span class="font-bold text-slate-400 uppercase tracking-wider text-[11px] block sm:inline w-full sm:w-auto">Official Channels:</span>
+              
+              <a href="https://youtube.com/@vimshicooking?si=TqQQ_rovL1YyC3ep" target="_blank" rel="noopener noreferrer"
+                 class="yt-channel-link inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-rose-50 dark:bg-rose-950/40 text-rose-600 dark:text-rose-400 font-bold hover:bg-rose-100 transition-colors">
+                <i class="fa-brands fa-youtube"></i> YouTube
+              </a>
+
+              <a href="https://www.instagram.com/vimshi_cooking?igsh=aHJvOXJod3kwMzhz" target="_blank" rel="noopener noreferrer"
+                 class="ig-channel-link inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-pink-50 dark:bg-pink-950/40 text-pink-600 dark:text-pink-400 font-bold hover:bg-pink-100 transition-colors">
+                <i class="fa-brands fa-instagram"></i> Instagram
+              </a>
+
+              <a href="https://www.facebook.com/people/%F0%9D%93%A5%F0%9D%93%B2%F0%9D%93%B6%F0%9D%93%A2%F0%9D%93%B1%F0%9D%93%B2-%F0%9D%93%92%F0%9D%93%B8%F0%9D%93%B8%F0%9D%93%B4%F0%9D%93%B2%F0%9D%93%B7%F0%9D%93%B0/61551843089617/?mibextid=LQQJ4d" target="_blank" rel="noopener noreferrer"
+                 class="fb-channel-link inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-blue-50 dark:bg-blue-950/40 text-blue-600 dark:text-blue-400 font-bold hover:bg-blue-100 transition-colors">
+                <i class="fa-brands fa-facebook"></i> Facebook
+              </a>
+            </div>
+          </div>
+
+          <!-- Hero Channel Stats Card -->
+          <div class="lg:col-span-4">
+            <div class="glass-card p-5 sm:p-6 rounded-3xl border border-slate-200/80 dark:border-slate-700/80 shadow-xl space-y-5">
+              <h3 class="font-serif font-bold text-base sm:text-lg text-slate-900 dark:text-white flex items-center gap-2 border-b border-slate-100 dark:border-slate-700/60 pb-3">
+                <i class="fa-solid fa-chart-simple text-orange-600"></i> Channel Highlights
+              </h3>
+              
+              <div class="grid grid-cols-2 lg:grid-cols-1 gap-3 sm:gap-4 hero-stats-grid">
+                <div class="flex items-center gap-3">
+                  <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-orange-100 dark:bg-orange-950/50 text-orange-600 dark:text-orange-400 flex items-center justify-center text-lg shrink-0">
+                    <i class="fa-solid fa-video"></i>
+                  </div>
+                  <div>
+                    <span id="statVideos" class="block font-black text-lg sm:text-2xl text-slate-900 dark:text-white">1,200+</span>
+                    <span class="text-[11px] text-slate-500 font-medium">Video Recipes</span>
+                  </div>
+                </div>
+
+                <div class="flex items-center gap-3">
+                  <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-rose-100 dark:bg-rose-950/50 text-rose-600 dark:text-rose-400 flex items-center justify-center text-lg shrink-0">
+                    <i class="fa-solid fa-users"></i>
+                  </div>
+                  <div>
+                    <span id="statSubscribers" class="block font-black text-lg sm:text-2xl text-slate-900 dark:text-white">1.14K+</span>
+                    <span class="text-[11px] text-slate-500 font-medium">Subscribers</span>
+                  </div>
+                </div>
+
+                <div class="flex items-center gap-3">
+                  <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-emerald-100 dark:bg-emerald-950/50 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-lg shrink-0">
+                    <i class="fa-solid fa-seedling"></i>
+                  </div>
+                  <div>
+                    <span class="block font-black text-lg sm:text-2xl text-slate-900 dark:text-white">100%</span>
+                    <span class="text-[11px] text-slate-500 font-medium">Vegetarian</span>
+                  </div>
+                </div>
+
+                <div class="flex items-center gap-3">
+                  <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-amber-100 dark:bg-amber-950/50 text-amber-600 dark:text-amber-400 flex items-center justify-center text-lg shrink-0">
+                    <i class="fa-solid fa-medal"></i>
+                  </div>
+                  <div>
+                    <span class="block font-black text-lg sm:text-2xl text-slate-900 dark:text-white">No-Fail</span>
+                    <span class="text-[11px] text-slate-500 font-medium">Tested Tips</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="pt-1">
+                <a href="https://youtube.com/@vimshicooking?si=TqQQ_rovL1YyC3ep" target="_blank" rel="noopener noreferrer"
+                   class="yt-channel-link block w-full text-center py-2.5 sm:py-3 bg-gradient-to-r from-rose-600 to-red-600 hover:from-rose-700 hover:to-red-700 text-white font-bold text-xs uppercase tracking-wider rounded-xl shadow-md transition-all active:scale-95">
+                  <i class="fa-brands fa-youtube mr-1.5"></i> Subscribe on YouTube
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- SPOTLIGHT RECIPE -->
+    <!-- ========================================================= -->
+    <section id="spotlight" class="py-10 sm:py-14 bg-slate-100/60 dark:bg-slate-800/40">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div id="spotlightContainer">
+          <!-- Rendered via JavaScript -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- INTERACTIVE RECIPE LIBRARY -->
+    <!-- ========================================================= -->
+    <section id="recipes" class="py-14 sm:py-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <!-- Section Header -->
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+          <div>
+            <span class="text-xs font-bold uppercase tracking-wider text-orange-600 dark:text-orange-400">
+              Interactive Cookbook
+            </span>
+            <h2 class="text-2xl sm:text-4xl font-serif font-extrabold text-slate-900 dark:text-white mt-1">
+              Explore VimShi Recipes
+            </h2>
+            <p class="text-slate-500 dark:text-slate-400 text-xs sm:text-sm mt-1">
+              Search by ingredient, dish name, or diet with dynamic serving portion calculator.
+            </p>
+          </div>
+
+          <!-- Recipe Search Box -->
+          <div class="relative w-full md:w-80">
+            <input type="text" id="recipeSearchInput" 
+                   placeholder="Search recipes or ingredients..." 
+                   class="w-full pl-9 pr-4 py-2.5 sm:py-3 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 shadow-sm" />
+            <i class="fa-solid fa-magnifying-glass absolute left-3 top-3 text-slate-400 text-xs sm:text-sm"></i>
+          </div>
+        </div>
+
+        <!-- Category Filter Tabs with Touch Scroll -->
+        <div class="flex items-center gap-2 overflow-x-auto pb-3 mb-4 no-scrollbar" id="categoryTabs">
+          <!-- Rendered dynamically via JavaScript -->
+        </div>
+
+        <!-- Dietary Tag Filter Pills -->
+        <div class="flex flex-wrap items-center gap-1.5 sm:gap-2 mb-6">
+          <span class="text-[11px] font-bold text-slate-400 uppercase mr-1">Quick Filters:</span>
+          <button data-tag="Zero Oil" class="diet-filter-pill px-2.5 py-1 rounded-full text-xs font-semibold bg-slate-100 dark:bg-slate-800 hover:bg-orange-100 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 transition-colors">
+            Zero Oil
+          </button>
+          <button data-tag="High Protein" class="diet-filter-pill px-2.5 py-1 rounded-full text-xs font-semibold bg-slate-100 dark:bg-slate-800 hover:bg-orange-100 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 transition-colors">
+            High Protein
+          </button>
+          <button data-tag="No Added Sugar" class="diet-filter-pill px-2.5 py-1 rounded-full text-xs font-semibold bg-slate-100 dark:bg-slate-800 hover:bg-orange-100 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 transition-colors">
+            No Added Sugar
+          </button>
+          <button data-tag="Eggless" class="diet-filter-pill px-2.5 py-1 rounded-full text-xs font-semibold bg-slate-100 dark:bg-slate-800 hover:bg-orange-100 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 transition-colors">
+            100% Eggless
+          </button>
+          <button data-tag="Weight Loss" class="diet-filter-pill px-2.5 py-1 rounded-full text-xs font-semibold bg-slate-100 dark:bg-slate-800 hover:bg-orange-100 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 transition-colors">
+            Weight Loss
+          </button>
+          <span id="recipeCountLabel" class="ml-auto text-xs font-semibold text-slate-400"></span>
+        </div>
+
+        <!-- Recipes Grid (1 col on mobile, 2 on tablet, 3 on desktop) -->
+        <div id="recipesGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-7">
+          <!-- Rendered via JavaScript -->
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- COMPLETE CHANNEL VIDEO GALLERY (30+ VIDEOS) -->
+    <!-- ========================================================= -->
+    <section id="videos" class="py-14 sm:py-20 bg-slate-100/70 dark:bg-slate-800/40 border-y border-slate-200/60 dark:border-slate-800">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
+          <div>
+            <span class="text-xs font-bold uppercase tracking-wider text-rose-600">
+              Direct YouTube Feed
+            </span>
+            <h2 class="text-2xl sm:text-4xl font-serif font-extrabold text-slate-900 dark:text-white mt-1">
+              Latest Video Tutorials
+            </h2>
+            <p class="text-slate-500 dark:text-slate-400 text-xs sm:text-sm mt-1">
+              Click any video to play directly inside our clean cinema modal player.
+            </p>
+          </div>
+
+          <a href="https://youtube.com/@vimshicooking?si=TqQQ_rovL1YyC3ep" target="_blank" rel="noopener noreferrer"
+             class="yt-channel-link inline-flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-2.5 rounded-xl bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs uppercase tracking-wider shadow transition-transform active:scale-95 shrink-0 self-start sm:self-auto">
+            <i class="fa-brands fa-youtube text-base"></i> View on YouTube
+          </a>
+        </div>
+
+        <!-- Video Gallery Grid (Responsive 1-2-3-4 cols) -->
+        <div id="videoGalleryGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
+          <!-- Rendered dynamically via JavaScript -->
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- ABOUT CHEF VIMSHI & PHILOSOPHY -->
+    <!-- ========================================================= -->
+    <section id="about" class="py-14 sm:py-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+          
+          <div class="lg:col-span-6 space-y-4 sm:space-y-6">
+            <span class="text-xs font-bold uppercase tracking-wider text-orange-600 dark:text-orange-400">
+              Our Journey & Passion
+            </span>
+            <h2 class="text-2xl sm:text-4xl font-serif font-extrabold text-slate-900 dark:text-white leading-tight">
+              Cooking with Love, Innovation, and Authenticity
+            </h2>
+            <p class="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
+              At <strong>VimShi Cooking</strong>, we believe that cooking at home should never be complicated or repetitive. Founded with a vision to bring both royal heritage dishes and healthy contemporary twists into every kitchen, our recipes are perfected to be 100% foolproof for both beginners and experienced cooks.
+            </p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 pt-1">
+              <div class="p-3.5 sm:p-4 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm">
+                <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-orange-100 dark:bg-orange-950/50 text-orange-600 flex items-center justify-center text-base sm:text-lg mb-2">
+                  <i class="fa-solid fa-heart-pulse"></i>
+                </div>
+                <h4 class="font-bold text-slate-900 dark:text-white text-xs sm:text-sm mb-1">Zero-Oil Cooking</h4>
+                <p class="text-xs text-slate-500 leading-relaxed">Crispy dosas and curries crafted without excess oils.</p>
+              </div>
+
+              <div class="p-3.5 sm:p-4 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm">
+                <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-amber-100 dark:bg-amber-950/50 text-amber-600 flex items-center justify-center text-base sm:text-lg mb-2">
+                  <i class="fa-solid fa-cake-candles"></i>
+                </div>
+                <h4 class="font-bold text-slate-900 dark:text-white text-xs sm:text-sm mb-1">Eggless Baking</h4>
+                <p class="text-xs text-slate-500 leading-relaxed">Fudgy brownies, bakery biscuits, and fusion cakes.</p>
+              </div>
+
+              <div class="p-3.5 sm:p-4 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm">
+                <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-rose-100 dark:bg-rose-950/50 text-rose-600 flex items-center justify-center text-base sm:text-lg mb-2">
+                  <i class="fa-solid fa-om"></i>
+                </div>
+                <h4 class="font-bold text-slate-900 dark:text-white text-xs sm:text-sm mb-1">Festive Bhog</h4>
+                <p class="text-xs text-slate-500 leading-relaxed">Auspicious sweets for Janmashtami, Diwali & festivals.</p>
+              </div>
+
+              <div class="p-3.5 sm:p-4 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm">
+                <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-emerald-100 dark:bg-emerald-950/50 text-emerald-600 flex items-center justify-center text-base sm:text-lg mb-2">
+                  <i class="fa-solid fa-mountain"></i>
+                </div>
+                <h4 class="font-bold text-slate-900 dark:text-white text-xs sm:text-sm mb-1">Regional Heritage</h4>
+                <p class="text-xs text-slate-500 leading-relaxed">Preserving authentic flavors like Himachali Siddu.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="lg:col-span-6 relative">
+            <div class="relative mx-auto max-w-md rounded-3xl overflow-hidden shadow-2xl border-4 border-white dark:border-slate-700">
+              <img src="https://i.ytimg.com/vi/mJD_rrUFZjs/maxresdefault.jpg" 
+                   onerror="this.src='https://i.ytimg.com/vi/mJD_rrUFZjs/hqdefault.jpg'"
+                   alt="Cooking in action" class="w-full h-80 sm:h-[420px] object-cover" />
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/30 to-transparent"></div>
+              
+              <div class="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6 text-white space-y-1 sm:space-y-2">
+                <span class="px-2.5 py-0.5 bg-orange-600 text-[11px] font-bold rounded-full">Chef VimShi Creed</span>
+                <p class="text-sm sm:text-base font-serif italic">"Cooking is not just about recipes — it's about sharing love and happiness on every plate."</p>
+                <div class="text-xs text-amber-300 font-semibold">— VimShi Cooking</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- SOCIAL MEDIA HUB (INSTAGRAM & FACEBOOK) -->
+    <!-- ========================================================= -->
+    <section id="social" class="py-14 sm:py-20 bg-gradient-to-b from-slate-100/50 to-white dark:from-slate-800/30 dark:to-slate-900">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-2xl mx-auto mb-10">
+          <span class="text-xs font-bold uppercase tracking-wider text-pink-600">Connect Everywhere</span>
+          <h2 class="text-2xl sm:text-4xl font-serif font-extrabold text-slate-900 dark:text-white mt-1">
+            Join the VimShi Foodie Community
+          </h2>
+          <p class="text-slate-500 dark:text-slate-400 text-xs sm:text-sm mt-2">
+            Follow our daily stories, short reels, and festival updates across all social platforms.
+          </p>
+        </div>
+
+        <!-- Social Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+          
+          <!-- Instagram Card -->
+          <div class="glass-card rounded-3xl p-5 sm:p-6 border border-slate-200 dark:border-slate-700 shadow-xl flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-3">
+                <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-tr from-amber-500 via-pink-500 to-purple-600 text-white flex items-center justify-center text-xl sm:text-2xl shadow-md">
+                  <i class="fa-brands fa-instagram"></i>
+                </div>
+                <span class="text-xs font-bold uppercase tracking-wider text-pink-500">Instagram</span>
+              </div>
+              <h4 class="text-lg sm:text-xl font-serif font-bold text-slate-900 dark:text-white">@vimshi_cooking</h4>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 mb-4">
+                Quick 60-second cooking reels, recipe hacks, and behind-the-scenes in the kitchen.
+              </p>
+              
+              <div id="igReelsGrid" class="grid grid-cols-2 gap-2 mb-5">
+                <!-- Rendered dynamically via JavaScript -->
+              </div>
+            </div>
+
+            <a href="https://www.instagram.com/vimshi_cooking?igsh=aHJvOXJod3kwMzhz" target="_blank" rel="noopener noreferrer"
+               class="ig-channel-link block w-full text-center py-2.5 sm:py-3 rounded-xl bg-gradient-to-r from-purple-600 via-pink-600 to-amber-500 text-white font-bold text-xs uppercase tracking-wider shadow-md hover:shadow-lg transition-all active:scale-95">
+              <i class="fa-brands fa-instagram mr-1.5"></i> Follow on Instagram
+            </a>
+          </div>
+
+          <!-- YouTube Card -->
+          <div class="glass-card rounded-3xl p-5 sm:p-6 border border-slate-200 dark:border-slate-700 shadow-xl flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-3">
+                <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-rose-600 text-white flex items-center justify-center text-xl sm:text-2xl shadow-md">
+                  <i class="fa-brands fa-youtube"></i>
+                </div>
+                <span class="text-xs font-bold uppercase tracking-wider text-rose-600">YouTube Main</span>
+              </div>
+              <h4 class="text-lg sm:text-xl font-serif font-bold text-slate-900 dark:text-white">@VimShiCooking</h4>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 mb-4">
+                Over 1,200 long-form step-by-step masterclasses and festive recipe tutorials.
+              </p>
+              
+              <div class="p-3.5 sm:p-4 rounded-2xl bg-slate-900 text-white mb-5 space-y-2.5">
+                <div class="flex items-center justify-between text-xs text-slate-400">
+                  <span>Subscribers</span>
+                  <strong class="text-white text-xs sm:text-sm">1.14K+</strong>
+                </div>
+                <div class="flex items-center justify-between text-xs text-slate-400">
+                  <span>Total Uploads</span>
+                  <strong class="text-white text-xs sm:text-sm">1,200+ Videos</strong>
+                </div>
+                <div class="flex items-center justify-between text-xs text-slate-400">
+                  <span>Channel Country</span>
+                  <strong class="text-white text-xs sm:text-sm">India 🇮🇳</strong>
+                </div>
+              </div>
+            </div>
+
+            <a href="https://youtube.com/@vimshicooking?si=TqQQ_rovL1YyC3ep" target="_blank" rel="noopener noreferrer"
+               class="yt-channel-link block w-full text-center py-2.5 sm:py-3 rounded-xl bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs uppercase tracking-wider shadow-md hover:shadow-lg transition-all active:scale-95">
+              <i class="fa-brands fa-youtube mr-1.5"></i> Subscribe Now
+            </a>
+          </div>
+
+          <!-- Facebook Card -->
+          <div class="glass-card rounded-3xl p-5 sm:p-6 border border-slate-200 dark:border-slate-700 shadow-xl flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-3">
+                <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-blue-600 text-white flex items-center justify-center text-xl sm:text-2xl shadow-md">
+                  <i class="fa-brands fa-facebook-f"></i>
+                </div>
+                <span class="text-xs font-bold uppercase tracking-wider text-blue-600">Facebook Page</span>
+              </div>
+              <h4 class="text-lg sm:text-xl font-serif font-bold text-slate-900 dark:text-white">𝓥𝓲𝓶𝓢𝓱𝓲 𝓒𝓸𝓸𝓴𝓲𝓷𝓰</h4>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 mb-5">
+                Connect with our active Facebook family for discussions, daily recipes, and cooking tips.
+              </p>
+
+              <div class="p-3.5 sm:p-4 rounded-2xl bg-blue-50 dark:bg-blue-950/40 border border-blue-200/50 dark:border-blue-900/40 text-blue-900 dark:text-blue-200 text-xs space-y-2 mb-5">
+                <div class="font-bold flex items-center gap-1.5">
+                  <i class="fa-solid fa-comments"></i> Community Group
+                </div>
+                <p class="text-[11px] leading-relaxed">
+                  Share photos of your recreated dishes, ask for advice on substitutions, and chat directly with Chef VimShi.
+                </p>
+              </div>
+            </div>
+
+            <a href="https://www.facebook.com/people/%F0%9D%93%A5%F0%9D%93%B2%F0%9D%93%B6%F0%9D%93%A2%F0%9D%93%B1%F0%9D%93%B2-%F0%9D%93%92%F0%9D%93%B8%F0%9D%93%B8%F0%9D%93%B4%F0%9D%93%B2%F0%9D%93%B7%F0%9D%93%B0/61551843089617/?mibextid=LQQJ4d" target="_blank" rel="noopener noreferrer"
+               class="fb-channel-link block w-full text-center py-2.5 sm:py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs uppercase tracking-wider shadow-md hover:shadow-lg transition-all active:scale-95">
+              <i class="fa-brands fa-facebook mr-1.5"></i> Visit Facebook Page
+            </a>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- CONTACT & COLLABORATION FORM -->
+    <!-- ========================================================= -->
+    <section id="contact" class="py-14 sm:py-20">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="glass-card rounded-3xl p-5 sm:p-10 border border-slate-200 dark:border-slate-700 shadow-2xl">
+          <div class="text-center max-w-xl mx-auto mb-6 sm:mb-8">
+            <span class="text-xs font-bold uppercase tracking-wider text-orange-600 dark:text-orange-400">Get in Touch</span>
+            <h2 class="text-2xl sm:text-3xl font-serif font-extrabold text-slate-900 dark:text-white mt-1">
+              Recipe Requests & Brand Collaborations
+            </h2>
+            <p class="text-slate-500 dark:text-slate-400 text-xs sm:text-sm mt-1.5">
+              Have a dish you'd like Chef VimShi to create? Or looking for a culinary partnership? Send a message below!
+            </p>
+          </div>
+
+          <form id="contactForm" class="space-y-4 sm:space-y-5">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
+              <div>
+                <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Your Name</label>
+                <input type="text" required placeholder="Chef or Foodie Name" 
+                       class="w-full px-3.5 py-2.5 sm:py-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-orange-500" />
+              </div>
+              <div>
+                <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Email Address</label>
+                <input type="email" required placeholder="you@example.com" 
+                       class="w-full px-3.5 py-2.5 sm:py-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-orange-500" />
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Inquiry Type</label>
+              <select class="w-full px-3.5 py-2.5 sm:py-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-orange-500">
+                <option value="request">Recipe Request or Question</option>
+                <option value="sponsorship">Brand Sponsorship & Collaboration</option>
+                <option value="workshop">Cooking Workshop / Event Inquiry</option>
+                <option value="feedback">Viewer Feedback & Appreciation</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Your Message</label>
+              <textarea rows="4" required placeholder="Tell Chef VimShi about your idea or request..." 
+                        class="w-full px-3.5 py-2.5 sm:py-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-orange-500"></textarea>
+            </div>
+
+            <button type="submit" 
+                    class="w-full py-3.5 bg-gradient-to-r from-orange-600 to-amber-600 hover:from-orange-700 hover:to-amber-700 text-white font-bold rounded-xl shadow-lg shadow-orange-500/30 transition-all text-xs sm:text-sm uppercase tracking-wider active:scale-95">
+              <i class="fa-solid fa-paper-plane mr-2"></i> Send Message to VimShi Cooking
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========================================================= -->
+  <!-- FOOTER -->
+  <!-- ========================================================= -->
+  <footer class="bg-slate-900 text-slate-300 pt-12 sm:pt-16 pb-10 border-t border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 sm:gap-10 pb-10 border-b border-slate-800">
+        
+        <!-- Brand Summary -->
+        <div class="lg:col-span-5 space-y-3">
+          <div class="flex items-center gap-3">
+            <img src="https://yt3.googleusercontent.com/dV_NHfyFB_A9rwbWwd-zGpNseeY-WozgBLVc4XZHpnxZnuKClarYzU-NGe5YVBESV15f6V-BfQ=s160-c-k-c0x00ffffff-no-rj" 
+                 alt="VimShi Cooking Logo" class="w-9 h-9 rounded-full border border-orange-500" />
+            <span class="font-serif font-black text-xl sm:text-2xl text-white">VimShi Cooking</span>
+          </div>
+          <p class="text-xs text-slate-400 leading-relaxed max-w-sm">
+            Dedicated to sharing innovative pure vegetarian culinary art, festival bhog sweets, zero-oil healthy meals, and eggless bakery secrets.
+          </p>
+          <div class="flex items-center gap-3 pt-1">
+            <a href="https://youtube.com/@vimshicooking?si=TqQQ_rovL1YyC3ep" target="_blank" rel="noopener noreferrer"
+               class="yt-channel-link w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-slate-800 hover:bg-rose-600 text-white flex items-center justify-center transition-colors">
+              <i class="fa-brands fa-youtube text-sm"></i>
+            </a>
+            <a href="https://www.instagram.com/vimshi_cooking?igsh=aHJvOXJod3kwMzhz" target="_blank" rel="noopener noreferrer"
+               class="ig-channel-link w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-slate-800 hover:bg-pink-600 text-white flex items-center justify-center transition-colors">
+              <i class="fa-brands fa-instagram text-sm"></i>
+            </a>
+            <a href="https://www.facebook.com/people/%F0%9D%93%A5%F0%9D%93%B2%F0%9D%93%B6%F0%9D%93%A2%F0%9D%93%B1%F0%9D%93%B2-%F0%9D%93%92%F0%9D%93%B8%F0%9D%93%B8%F0%9D%93%B4%F0%9D%93%B2%F0%9D%93%B7%F0%9D%93%B0/61551843089617/?mibextid=LQQJ4d" target="_blank" rel="noopener noreferrer"
+               class="fb-channel-link w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-slate-800 hover:bg-blue-600 text-white flex items-center justify-center transition-colors">
+              <i class="fa-brands fa-facebook text-sm"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="lg:col-span-3 space-y-2.5">
+          <h5 class="text-white font-bold text-xs uppercase tracking-wider">Quick Links</h5>
+          <ul class="space-y-1.5 text-xs">
+            <li><a href="#hero" class="hover:text-orange-400 transition-colors">Home</a></li>
+            <li><a href="#spotlight" class="hover:text-orange-400 transition-colors">Recipe Spotlight</a></li>
+            <li><a href="#recipes" class="hover:text-orange-400 transition-colors">Interactive Recipes</a></li>
+            <li><a href="#videos" class="hover:text-orange-400 transition-colors">Video Showcase</a></li>
+            <li><a href="#about" class="hover:text-orange-400 transition-colors">About the Chef</a></li>
+            <li><a href="#contact" class="hover:text-orange-400 transition-colors">Recipe Request</a></li>
+          </ul>
+        </div>
+
+        <!-- Newsletter Signup -->
+        <div class="lg:col-span-4 space-y-2.5">
+          <h5 class="text-white font-bold text-xs uppercase tracking-wider">Kitchen Newsletter</h5>
+          <p class="text-xs text-slate-400">Get innovative recipes and festival meal plans straight to your inbox.</p>
+          <form id="newsletterForm" class="flex gap-2">
+            <input type="email" required placeholder="Enter your email" 
+                   class="px-3 py-2 rounded-xl bg-slate-800 border border-slate-700 text-xs text-white focus:outline-none focus:ring-2 focus:ring-orange-500 flex-1" />
+            <button type="submit" 
+                    class="px-3.5 py-2 bg-orange-600 hover:bg-orange-700 text-white font-bold text-xs rounded-xl shadow transition-colors shrink-0">
+              Join
+            </button>
+          </form>
+        </div>
+
+      </div>
+
+      <div class="pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-3">
+        <p>© 2026 VimShi Cooking. All Rights Reserved.</p>
+        <div class="flex items-center gap-4">
+          <p>Serving via Localhost Port 8000</p>
+          <a href="/admin" class="hover:text-amber-400 transition-colors flex items-center gap-1 text-[11px]">
+            <i class="fa-solid fa-lock text-[10px]"></i> Admin Portal
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========================================================= -->
+  <!-- FLOATING KITCHEN COOKING TIMER (RESPONSIVE) -->
+  <!-- ========================================================= -->
+  <div class="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-40">
+    <button onclick="window.toggleTimerModal()"
+            class="float-timer-btn px-3.5 py-2.5 sm:px-4 sm:py-3 rounded-2xl bg-gradient-to-r from-orange-600 to-amber-500 hover:from-orange-700 hover:to-amber-600 text-white font-bold text-xs uppercase tracking-wider shadow-2xl flex items-center gap-2 active:scale-95 transition-all">
+      <i class="fa-solid fa-stopwatch text-sm sm:text-base"></i>
+      <span id="floatTimerLabel">Kitchen Timer</span>
+    </button>
+  </div>
+
+  <!-- Timer Modal Dialog -->
+  <div id="timerModal" class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4">
+    <div class="bg-white dark:bg-slate-800 rounded-3xl max-w-sm w-full p-5 sm:p-6 shadow-2xl border border-slate-200 dark:border-slate-700 relative">
+      <button onclick="window.toggleTimerModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 dark:hover:text-white">
+        <i class="fa-solid fa-xmark text-lg"></i>
+      </button>
+
+      <div class="text-center space-y-4">
+        <div class="w-12 h-12 rounded-full bg-orange-100 dark:bg-orange-950/60 text-orange-600 flex items-center justify-center mx-auto text-xl">
+          <i class="fa-solid fa-stopwatch"></i>
+        </div>
+        <div>
+          <h4 class="font-serif font-bold text-lg sm:text-xl text-slate-900 dark:text-white">Kitchen Assistant Timer</h4>
+          <p class="text-xs text-slate-500">Keep track of your cooking & simmering times</p>
+        </div>
+
+        <div id="timerTimeText" class="text-4xl sm:text-5xl font-black font-mono tracking-tight text-orange-600 dark:text-orange-400 py-1">
+          00:00
+        </div>
+
+        <!-- Quick Preset Buttons -->
+        <div class="grid grid-cols-4 gap-1.5 sm:gap-2">
+          <button onclick="window.setQuickTimer(3)" class="py-2 rounded-xl bg-slate-100 dark:bg-slate-700 hover:bg-orange-100 text-xs font-bold transition-colors">3m</button>
+          <button onclick="window.setQuickTimer(5)" class="py-2 rounded-xl bg-slate-100 dark:bg-slate-700 hover:bg-orange-100 text-xs font-bold transition-colors">5m</button>
+          <button onclick="window.setQuickTimer(10)" class="py-2 rounded-xl bg-slate-100 dark:bg-slate-700 hover:bg-orange-100 text-xs font-bold transition-colors">10m</button>
+          <button onclick="window.setQuickTimer(15)" class="py-2 rounded-xl bg-slate-100 dark:bg-slate-700 hover:bg-orange-100 text-xs font-bold transition-colors">15m</button>
+        </div>
+
+        <!-- Timer Controls -->
+        <div class="flex items-center justify-center gap-2.5 pt-1">
+          <button id="timerStartBtn" onclick="window.startCookingTimer()" class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs uppercase transition-colors">
+            Start
+          </button>
+          <button id="timerPauseBtn" style="display:none;" onclick="window.pauseCookingTimer()" class="px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-white font-bold text-xs uppercase transition-colors">
+            Pause
+          </button>
+          <button onclick="window.stopCookingTimer()" class="px-5 py-2.5 rounded-xl bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 text-slate-800 dark:text-white font-bold text-xs uppercase transition-colors">
+            Reset
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================= -->
+  <!-- RECIPE DETAIL MODAL (RESPONSIVE) -->
+  <!-- ========================================================= -->
+  <div id="recipeModal" class="modal-overlay hidden fixed inset-0 z-50 bg-black/75 backdrop-blur-md flex items-center justify-center p-2.5 sm:p-6 overflow-y-auto">
+    <div class="bg-white dark:bg-slate-800 rounded-3xl max-w-4xl w-full p-3.5 sm:p-7 shadow-2xl border border-slate-200 dark:border-slate-700 relative max-h-[94vh] overflow-y-auto my-auto">
+      <div id="recipeModalBody">
+        <!-- Rendered dynamically via JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================= -->
+  <!-- VIDEO PLAYER MODAL (RESPONSIVE) -->
+  <!-- ========================================================= -->
+  <div id="videoModal" class="modal-overlay hidden fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-2.5 sm:p-6">
+    <div class="bg-slate-900 rounded-3xl max-w-4xl w-full p-3.5 sm:p-6 shadow-2xl border border-slate-800 relative">
+      <div class="flex items-center justify-between pb-3 mb-2 border-b border-slate-800">
+        <h4 id="videoModalTitle" class="font-bold text-white text-xs sm:text-base line-clamp-1 pr-2"></h4>
+        <button onclick="window.closeVideoModal()" class="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-slate-800 text-white hover:bg-slate-700 flex items-center justify-center shrink-0">
+          <i class="fa-solid fa-xmark text-base"></i>
+        </button>
+      </div>
+
+      <!-- Video Aspect Frame (16:9 responsive) -->
+      <div id="videoPlayerFrame" class="aspect-video w-full rounded-2xl overflow-hidden bg-black shadow-inner">
+        <!-- Iframe injected via JS -->
+      </div>
+
+      <div class="mt-3 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-400">
+        <div class="flex items-center gap-2">
+          <img src="https://yt3.googleusercontent.com/dV_NHfyFB_A9rwbWwd-zGpNseeY-WozgBLVc4XZHpnxZnuKClarYzU-NGe5YVBESV15f6V-BfQ=s160-c-k-c0x00ffffff-no-rj" 
+               alt="VimShi" class="w-6 h-6 rounded-full border border-orange-500" />
+          <span class="text-[11px] sm:text-xs">VimShi Cooking Official Channel</span>
+        </div>
+        <a href="https://youtube.com/@vimshicooking?si=TqQQ_rovL1YyC3ep" target="_blank" rel="noopener noreferrer"
+           class="yt-channel-link px-3 py-1.5 rounded-lg bg-rose-600 hover:bg-rose-700 text-white font-bold uppercase tracking-wider text-[10px] sm:text-[11px] transition-colors">
+          Subscribe on YouTube
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================= -->
+  <!-- TOAST NOTIFICATION CONTAINER -->
+  <!-- ========================================================= -->
+  <div id="toastContainer" class="fixed top-20 right-4 sm:top-24 sm:right-6 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+  <!-- Scripts -->
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

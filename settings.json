@@ -1,0 +1,58 @@
+{
+  "mode": "ai",
+  "auto_sync_interval_minutes": 30,
+  "last_sync": "24 Oct 2026, 05:32 PM",
+  "total_ai_synced": 16,
+  "logs": [
+    {
+      "timestamp": "24 Oct 2026, 05:32 PM",
+      "status": "up_to_date",
+      "message": "Feeds scanned: All best long-form videos up-to-date. (Filtered out 11 Shorts).",
+      "count": 0,
+      "shorts_filtered": 11
+    },
+    {
+      "timestamp": "24 Oct 2026, 05:26 PM",
+      "status": "up_to_date",
+      "message": "Feeds scanned: All best long-form videos up-to-date. (Filtered out 11 Shorts).",
+      "count": 0,
+      "shorts_filtered": 11
+    },
+    {
+      "timestamp": "24 Oct 2026, 05:17 PM",
+      "status": "up_to_date",
+      "message": "Feeds scanned: All best long-form videos up-to-date. (Filtered out 11 Shorts).",
+      "count": 0,
+      "shorts_filtered": 11
+    },
+    {
+      "timestamp": "24 Oct 2026, 05:17 PM",
+      "status": "up_to_date",
+      "message": "Feeds scanned: All best long-form videos up-to-date. (Filtered out 11 Shorts).",
+      "count": 0,
+      "shorts_filtered": 11
+    },
+    {
+      "timestamp": "24 Oct 2026, 05:15 PM",
+      "status": "up_to_date",
+      "message": "Feeds scanned: All best long-form videos up-to-date. (Filtered out 11 Shorts).",
+      "count": 0,
+      "shorts_filtered": 11
+    },
+    {
+      "timestamp": "24 Oct 2026, 05:11 PM",
+      "status": "up_to_date",
+      "message": "AI checked YouTube, Instagram & Facebook feeds. All channels are 100% up to date.",
+      "count": 0
+    },
+    {
+      "timestamp": "24 Oct 2026, 05:10 PM",
+      "status": "success",
+      "message": "AI Engine ingested 11 new video recipe(s): Tandoori Stuffed Potato Flatbread (Aloo Kulcha / Paratha), Special Views Viral Video Subscribers Grow Gujraticooking Recipe...",
+      "count": 11
+    }
+  ],
+  "gemini_api_key": "",
+  "ai_model": "gemini-3.8-flash",
+  "ai_status": "Gemini 3.8 Flash Active"
+}
