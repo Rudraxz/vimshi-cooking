@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard | VimShi Cooking</title>
+  
+  <link rel="icon" type="image/png" href="https://yt3.googleusercontent.com/dV_NHfyFB_A9rwbWwd-zGpNseeY-WozgBLVc4XZHpnxZnuKClarYzU-NGe5YVBESV15f6V-BfQ=s160-c-k-c0x00ffffff-no-rj" />
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    .font-serif { font-family: 'Playfair Display', serif; }
+  </style>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen selection:bg-orange-500 selection:text-white">
+
+  <!-- ========================================================= -->
+  <!-- ADMIN NAVBAR -->
+  <!-- ========================================================= -->
+  <header class="bg-slate-800/80 backdrop-blur-md border-b border-slate-700/80 sticky top-0 z-30">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16 sm:h-20">
+        
+        <!-- Logo -->
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full p-0.5 bg-gradient-to-tr from-amber-400 to-rose-600 shadow-md shrink-0">
+            <img src="https://yt3.googleusercontent.com/dV_NHfyFB_A9rwbWwd-zGpNseeY-WozgBLVc4XZHpnxZnuKClarYzU-NGe5YVBESV15f6V-BfQ=s160-c-k-c0x00ffffff-no-rj" 
+                 alt="VimShi Cooking" class="w-full h-full object-cover rounded-full" />
+          </div>
+          <div>
+            <span class="font-serif font-black text-lg sm:text-xl text-white flex items-center gap-1.5">
+              <span>VimShi</span>
+              <span class="text-orange-400">Control Panel</span>
+            </span>
+            <span class="text-[10px] uppercase font-bold tracking-widest text-emerald-400 flex items-center gap-1">
+              <i class="fa-solid fa-circle text-[6px]"></i> Secure Admin Session
+            </span>
+          </div>
+        </div>
+
+        <!-- Navigation Buttons -->
+        <div class="flex items-center gap-2.5 sm:gap-4">
+          <a href="/" target="_blank"
+             class="px-3.5 py-2 rounded-xl bg-slate-700 hover:bg-slate-600 text-xs font-semibold text-slate-200 transition-colors flex items-center gap-1.5">
+            <i class="fa-solid fa-arrow-up-right-from-square text-[11px]"></i>
+            <span class="hidden sm:inline">View Live Website</span>
+          </a>
+
+          <!-- Logout Form -->
+          <form method="POST" action="/logout">
+            <button type="submit" 
+                    class="px-3.5 py-2 rounded-xl bg-rose-600/80 hover:bg-rose-600 text-xs font-bold uppercase tracking-wider text-white transition-colors flex items-center gap-1.5">
+              <i class="fa-solid fa-power-off"></i>
+              <span>Logout</span>
+            </button>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================================= -->
+  <!-- MAIN ADMIN DASHBOARD -->
+  <!-- ========================================================= -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10 space-y-8">
+    
+    <!-- Top Welcome Banner -->
+    <div class="p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-orange-600/90 via-amber-600/90 to-rose-600/90 border border-orange-500/30 shadow-2xl relative overflow-hidden">
+      <div class="absolute -right-8 -bottom-8 opacity-10 pointer-events-none">
+        <i class="fa-solid fa-shield-halved text-[180px]"></i>
+      </div>
+      <div class="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <span class="px-3 py-1 rounded-full bg-white/20 text-xs font-bold uppercase tracking-wider text-white backdrop-blur-md">
+            Authenticated as: <strong class="text-amber-200">{{ session.get('admin_user', 'Admin') }}</strong>
+          </span>
+          <h2 class="text-2xl sm:text-3xl font-serif font-black text-white mt-2">
+            VimShi Cooking Management Suite
+          </h2>
+          <p class="text-xs sm:text-sm text-amber-100 max-w-xl mt-1">
+            Manage public recipes, read collaboration inquiries submitted via the website, and configure your credentials.
+          </p>
+        </div>
+
+        <button onclick="openRecipeModal()"
+                class="self-start sm:self-auto px-5 py-3 rounded-2xl bg-white text-orange-600 hover:bg-amber-50 font-bold text-xs uppercase tracking-wider shadow-lg transition-transform active:scale-95 flex items-center gap-2">
+          <i class="fa-solid fa-plus text-sm"></i> Add New Recipe
+        </button>
+      </div>
+    </div>
+
+    <!-- ========================================================= -->
+    <!-- AI AUTOPILOT VS MANUAL MODE CONTROL PANEL -->
+    <!-- ========================================================= -->
+    <div class="p-6 sm:p-7 rounded-3xl bg-slate-800/95 border-2 border-slate-700/80 shadow-2xl relative overflow-hidden" id="aiModeCard">
+      <!-- Glow ambient background -->
+      <div id="aiModeGlow" class="absolute -top-20 -right-20 w-80 h-80 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none transition-colors duration-500"></div>
+
+      <div class="relative z-10 space-y-6">
+        
+        <!-- Header & Toggle Switch -->
+        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-5 border-b border-slate-700/70">
+          <div>
+            <div class="flex flex-wrap items-center gap-2 mb-1.5">
+              <span id="aiStatusPill" class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-emerald-950/80 text-emerald-400 border border-emerald-500/40 flex items-center gap-1.5">
+                <i class="fa-solid fa-circle text-[7px] animate-pulse"></i> AI Autopilot Active
+              </span>
+              <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-rose-950/80 text-rose-300 border border-rose-500/30">
+                <i class="fa-solid fa-ban mr-1 text-[10px]"></i> YouTube Shorts Blocked
+              </span>
+              <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-amber-950/80 text-amber-300 border border-amber-500/30">
+                <i class="fa-solid fa-chart-line-up mr-1 text-[10px]"></i> Only Best & Growing Videos
+              </span>
+            </div>
+            <h3 class="font-serif font-black text-xl sm:text-2xl text-white">
+              AI Video & Recipe Automation Engine
+            </h3>
+            <p class="text-xs sm:text-sm text-slate-400 mt-1 max-w-2xl">
+              When in <strong>AI Mode</strong>, the engine continuously monitors your YouTube channel, Instagram reels, and Facebook uploads. New videos are automatically parsed into full recipes with ingredients, steps, and tags. In <strong>Manual Mode</strong>, you have full control over what is published.
+            </p>
+          </div>
+
+          <!-- The Mode Switch Button & Instant Scan Button -->
+          <div class="flex flex-wrap items-center gap-3 shrink-0">
+            <!-- Mode Toggle Button -->
+            <button id="toggleModeBtn" onclick="toggleAIMode()"
+                    class="px-5 py-3 rounded-2xl font-bold text-xs uppercase tracking-wider shadow-lg transition-all active:scale-95 flex items-center gap-2.5 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white">
+              <i id="toggleModeIcon" class="fa-solid fa-robot text-base"></i>
+              <span id="toggleModeText">Switch to Manual Mode</span>
+            </button>
+
+            <!-- Run AI Scan Now Button -->
+            <button id="syncNowBtn" onclick="triggerAISync()"
+                    class="px-4 py-3 rounded-2xl bg-slate-700 hover:bg-slate-600 text-white font-bold text-xs uppercase tracking-wider transition-all active:scale-95 flex items-center gap-2">
+              <i id="syncIcon" class="fa-solid fa-bolt text-amber-400"></i>
+              <span>Sync Now</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Live Status Sub-grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div class="p-3.5 rounded-2xl bg-slate-900/70 border border-slate-700/60">
+            <span class="block text-[10px] font-bold uppercase text-slate-400 mb-1">Monitored Feeds</span>
+            <div class="flex items-center gap-2 text-xs font-bold text-white">
+              <span class="text-rose-400"><i class="fa-brands fa-youtube mr-1"></i>YouTube</span>
+              <span class="text-slate-500">•</span>
+              <span class="text-pink-400"><i class="fa-brands fa-instagram mr-1"></i>Instagram</span>
+              <span class="text-slate-500">•</span>
+              <span class="text-blue-400"><i class="fa-brands fa-facebook mr-1"></i>Facebook</span>
+            </div>
+          </div>
+
+          <div class="p-3.5 rounded-2xl bg-slate-900/70 border border-slate-700/60">
+            <span class="block text-[10px] font-bold uppercase text-slate-400 mb-1">Last AI Ingestion</span>
+            <div class="text-xs font-bold text-slate-200" id="aiLastSyncTime">
+              Checking feeds...
+            </div>
+          </div>
+
+          <div class="p-3.5 rounded-2xl bg-slate-900/70 border border-slate-700/60">
+            <span class="block text-[10px] font-bold uppercase text-slate-400 mb-1">AI Ingested Recipes</span>
+            <div class="text-xs font-bold text-emerald-400 flex items-center gap-1.5" id="aiTotalSynced">
+              <i class="fa-solid fa-wand-magic-sparkles"></i> <span>0 recipes auto-created</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Expandable AI Activity Log -->
+        <div class="pt-1">
+          <button onclick="document.getElementById('aiLogsDrawer').classList.toggle('hidden')" 
+                  class="text-xs text-slate-400 hover:text-amber-400 font-semibold flex items-center gap-1.5 transition-colors">
+            <i class="fa-solid fa-clock-rotate-left text-[11px]"></i>
+            <span>View Recent AI Activity Logs</span>
+            <i class="fa-solid fa-chevron-down text-[10px] ml-0.5"></i>
+          </button>
+          <div id="aiLogsDrawer" class="hidden mt-3 p-3.5 rounded-2xl bg-slate-900/90 border border-slate-700/70 space-y-2 text-xs font-mono max-h-48 overflow-y-auto">
+            <!-- Injected via JavaScript -->
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+      
+      <div class="p-5 rounded-2xl bg-slate-800 border border-slate-700/80 shadow-md">
+        <div class="flex items-center justify-between">
+          <span class="text-xs uppercase font-bold text-slate-400">Total Recipes</span>
+          <div class="w-9 h-9 rounded-xl bg-orange-500/20 text-orange-400 flex items-center justify-center text-sm">
+            <i class="fa-solid fa-utensils"></i>
+          </div>
+        </div>
+        <div class="mt-3">
+          <span id="statRecipeCount" class="text-3xl font-black text-white">0</span>
+          <span class="text-xs text-slate-500 ml-1">featured dishes</span>
+        </div>
+      </div>
+
+      <div class="p-5 rounded-2xl bg-slate-800 border border-slate-700/80 shadow-md">
+        <div class="flex items-center justify-between">
+          <span class="text-xs uppercase font-bold text-slate-400">Contact Inbox</span>
+          <div class="w-9 h-9 rounded-xl bg-rose-500/20 text-rose-400 flex items-center justify-center text-sm">
+            <i class="fa-solid fa-envelope"></i>
+          </div>
+        </div>
+        <div class="mt-3">
+          <span id="statMessageCount" class="text-3xl font-black text-white">0</span>
+          <span class="text-xs text-slate-500 ml-1">inquiries received</span>
+        </div>
+      </div>
+
+      <div class="p-5 rounded-2xl bg-slate-800 border border-slate-700/80 shadow-md">
+        <div class="flex items-center justify-between">
+          <span class="text-xs uppercase font-bold text-slate-400">Rate Limiter</span>
+          <div class="w-9 h-9 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-sm">
+            <i class="fa-solid fa-shield-halved"></i>
+          </div>
+        </div>
+        <div class="mt-3">
+          <span class="text-xl font-bold text-emerald-400">Active</span>
+          <span class="block text-[11px] text-slate-400 mt-0.5">5 attempts / 15m lockout</span>
+        </div>
+      </div>
+
+      <div class="p-5 rounded-2xl bg-slate-800 border border-slate-700/80 shadow-md">
+        <div class="flex items-center justify-between">
+          <span class="text-xs uppercase font-bold text-slate-400">Cookie Protocol</span>
+          <div class="w-9 h-9 rounded-xl bg-blue-500/20 text-blue-400 flex items-center justify-center text-sm">
+            <i class="fa-solid fa-lock"></i>
+          </div>
+        </div>
+        <div class="mt-3">
+          <span class="text-xl font-bold text-blue-400">HttpOnly</span>
+          <span class="block text-[11px] text-slate-400 mt-0.5">SameSite=Strict (Anti-XSS)</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Navigation Tabs for Sections -->
+    <div class="flex items-center gap-2 border-b border-slate-800 pb-3">
+      <button onclick="switchTab('recipes')" id="tabBtn-recipes"
+              class="admin-tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-colors bg-orange-600 text-white">
+        <i class="fa-solid fa-book-open mr-1.5"></i> Recipes Manager
+      </button>
+      <button onclick="switchTab('messages')" id="tabBtn-messages"
+              class="admin-tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-colors text-slate-400 hover:text-white hover:bg-slate-800">
+        <i class="fa-solid fa-inbox mr-1.5"></i> Contact Inquiries (<span id="inboxBadge">0</span>)
+      </button>
+      <button onclick="switchTab('security')" id="tabBtn-security"
+              class="admin-tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-colors text-slate-400 hover:text-white hover:bg-slate-800">
+        <i class="fa-solid fa-key mr-1.5"></i> Security & Password
+      </button>
+    </div>
+
+    <!-- ========================================================= -->
+    <!-- TAB 1: RECIPES MANAGER -->
+    <!-- ========================================================= -->
+    <section id="section-recipes" class="space-y-4">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-slate-800/80 p-4 rounded-2xl border border-slate-700/80">
+        <div>
+          <h3 class="font-bold text-sm sm:text-base text-white">Interactive Recipe Database</h3>
+          <p class="text-xs text-slate-400">Recipes displayed on your public website catalog.</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <input type="text" id="adminRecipeSearch" placeholder="Search recipes..." oninput="filterAdminRecipes()"
+                 class="px-3.5 py-2 bg-slate-900 border border-slate-700 rounded-xl text-xs text-white focus:outline-none focus:ring-2 focus:ring-orange-500 w-full sm:w-60" />
+        </div>
+      </div>
+
+      <!-- Recipes Grid List -->
+      <div id="adminRecipesList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <!-- Rendered dynamically -->
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- TAB 2: CONTACT INBOX -->
+    <!-- ========================================================= -->
+    <section id="section-messages" class="hidden space-y-4">
+      <div class="bg-slate-800/80 p-4 rounded-2xl border border-slate-700/80 flex items-center justify-between">
+        <div>
+          <h3 class="font-bold text-sm sm:text-base text-white">Viewer & Collaboration Inquiries</h3>
+          <p class="text-xs text-slate-400">Messages sent via the contact form on your website.</p>
+        </div>
+        <button onclick="fetchMessages()" class="px-3 py-1.5 rounded-lg bg-slate-700 hover:bg-slate-600 text-xs font-semibold text-slate-200">
+          <i class="fa-solid fa-rotate-right mr-1"></i> Refresh
+        </button>
+      </div>
+
+      <div id="messagesList" class="space-y-3">
+        <!-- Rendered dynamically -->
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- TAB 3: SECURITY & PASSWORD -->
+    <!-- ========================================================= -->
+    <section id="section-security" class="hidden">
+      <div class="max-w-xl mx-auto p-6 sm:p-8 rounded-3xl bg-slate-800/90 border border-slate-700 shadow-2xl space-y-6">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-wider text-orange-400">Admin Authentication</span>
+          <h3 class="text-xl font-serif font-black text-white mt-1">Change Admin Password</h3>
+          <p class="text-xs text-slate-400 mt-1">
+            New passwords are automatically re-encrypted with salted PBKDF2/scrypt one-way hash.
+          </p>
+        </div>
+
+        <form id="changePasswordForm" onsubmit="handlePasswordChange(event)" class="space-y-4">
+          <div>
+            <label class="block text-xs font-bold uppercase text-slate-300 mb-1">Current Password</label>
+            <input type="password" id="currentPassword" required 
+                   class="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-xl text-sm text-white focus:outline-none focus:ring-2 focus:ring-orange-500" />
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold uppercase text-slate-300 mb-1">New Secure Password</label>
+            <input type="password" id="newPassword" required minlength="8"
+                   placeholder="Minimum 8 characters"
+                   class="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-xl text-sm text-white focus:outline-none focus:ring-2 focus:ring-orange-500" />
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold uppercase text-slate-300 mb-1">Confirm New Password</label>
+            <input type="password" id="confirmNewPassword" required minlength="8"
+                   placeholder="Re-enter new password"
+                   class="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-xl text-sm text-white focus:outline-none focus:ring-2 focus:ring-orange-500" />
+          </div>
+
+          <button type="submit" 
+                  class="w-full py-3.5 bg-gradient-to-r from-orange-600 to-amber-600 hover:from-orange-700 hover:to-amber-700 text-white font-bold text-xs uppercase tracking-wider rounded-xl shadow-lg transition-all active:scale-95">
+            <i class="fa-solid fa-shield-check mr-1.5"></i> Update Password & Re-Encrypt
+          </button>
+        </form>
+
+        <!-- Google Gemini Generative AI Key Integration -->
+        <div class="pt-6 border-t border-slate-700/80 space-y-3">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-blue-500 via-indigo-500 to-violet-600 text-white flex items-center justify-center text-sm shadow">
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-xs sm:text-sm text-white">Google Gemini API Key</h4>
+                <p class="text-[11px] text-slate-400">Enables deep chef AI notes & transcript writing</p>
+              </div>
+            </div>
+            <a href="https://aistudio.google.com/api-keys" target="_blank" rel="noopener noreferrer"
+               class="px-2.5 py-1 rounded-lg bg-blue-600/20 hover:bg-blue-600 text-blue-300 hover:text-white text-[11px] font-semibold transition-colors flex items-center gap-1">
+              <span>Get Free Key</span> <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i>
+            </a>
+          </div>
+
+          <form onsubmit="handleSaveGeminiKey(event)" class="space-y-3">
+            <div class="relative">
+              <input type="password" id="geminiApiKeyInput" placeholder="Paste your Gemini API key (AIzaSy...)" 
+                     class="w-full px-3.5 py-2.5 bg-slate-900 border border-slate-700 rounded-xl text-xs text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+            </div>
+            <div class="flex items-center justify-between">
+              <span id="geminiKeyStatus" class="text-[11px] text-slate-400">
+                <i class="fa-solid fa-circle-info mr-1"></i> Paste key from Google AI Studio
+              </span>
+              <button type="submit" 
+                      class="px-4 py-2 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold text-xs uppercase tracking-wider rounded-xl shadow transition-all active:scale-95">
+                Save & Activate Key
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========================================================= -->
+  <!-- ADD / EDIT RECIPE MODAL -->
+  <!-- ========================================================= -->
+  <div id="recipeFormModal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
+    <div class="bg-slate-800 rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl border border-slate-700 my-auto max-h-[92vh] overflow-y-auto">
+      <div class="flex items-center justify-between pb-4 mb-4 border-b border-slate-700">
+        <h4 id="recipeModalHeading" class="text-lg font-serif font-bold text-white">Add New Recipe</h4>
+        <button onclick="closeRecipeModal()" class="text-slate-400 hover:text-white">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+
+      <form id="recipeEditForm" onsubmit="handleRecipeSubmit(event)" class="space-y-4 text-xs">
+        <input type="hidden" id="editRecipeId" value="" />
+
+        <div>
+          <label class="block font-bold text-slate-300 mb-1">Recipe Title (English)</label>
+          <input type="text" id="recipeTitle" required placeholder="e.g. Crispy Lauki Dosa" 
+                 class="w-full px-3.5 py-2.5 bg-slate-900 border border-slate-700 rounded-xl text-white text-xs focus:ring-2 focus:ring-orange-500" />
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block font-bold text-slate-300 mb-1">Hindi Title</label>
+            <input type="text" id="recipeHindiTitle" placeholder="e.g. बिना तेल का कुरकुरा लौकी डोसा" 
+                   class="w-full px-3.5 py-2.5 bg-slate-900 border border-slate-700 rounded-xl text-white text-xs focus:ring-2 focus:ring-orange-500" />
+          </div>
+          <div>
+            <label class="block font-bold text-slate-300 mb-1">Category</label>
+            <select id="recipeCategory" class="w-full px-3.5 py-2.5 bg-slate-900 border border-slate-700 rounded-xl text-white text-xs focus:ring-2 focus:ring-orange-500">
+              <option value="sweets">Sweets & Desserts</option>
+              <option value="healthy">Zero-Oil & Healthy</option>
+              <option value="curries">Curries & Gravies</option>
+              <option value="baking">Snacks & Baking</option>
+              <option value="regional">Regional & Heritage</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div>
+            <label class="block font-bold text-slate-300 mb-1">Highlight Badge</label>
+            <input type="text" id="recipeBadge" placeholder="e.g. Weight Loss / Diwali Special" 
+                   class="w-full px-3.5 py-2.5 bg-slate-900 border border-slate-700 rounded-xl text-white text-xs" />
+          </div>
+          <div>
+            <label class="block font-bold text-slate-300 mb-1">Diet Type</label>
+            <input type="text" id="recipeDiet" placeholder="e.g. Pure Veg / Eggless" 
+                   class="w-full px-3.5 py-2.5 bg-slate-900 border border-slate-700 rounded-xl text-white text-xs" />
+          </div>
+          <div>
+            <label class="block font-bold text-slate-300 mb-1">YouTube Video ID</label>
+            <input type="text" id="recipeVideoId" required placeholder="11-character video ID" 
+                   class="w-full px-3.5 py-2.5 bg-slate-900 border border-slate-700 rounded-xl text-white text-xs" />
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div>
+            <label class="block font-bold text-slate-300 mb-1">Duration</label>
+            <input type="text" id="recipeDuration" placeholder="e.g. 25 mins" 
+                   class="w-full px-3.5 py-2.5 bg-slate-900 border border-slate-700 rounded-xl text-white text-xs" />
+          </div>
+          <div>
+            <label class="block font-bold text-slate-300 mb-1">Prep Time</label>
+            <input type="text" id="recipePrep" placeholder="e.g. 10 mins" 
+                   class="w-full px-3.5 py-2.5 bg-slate-900 border border-slate-700 rounded-xl text-white text-xs" />
+          </div>
+          <div>
+            <label class="block font-bold text-slate-300 mb-1">Cook Time</label>
+            <input type="text" id="recipeCook" placeholder="e.g. 15 mins" 
+                   class="w-full px-3.5 py-2.5 bg-slate-900 border border-slate-700 rounded-xl text-white text-xs" />
+          </div>
+        </div>
+
+        <div>
+          <label class="block font-bold text-slate-300 mb-1">Short Description</label>
+          <textarea id="recipeDesc" rows="2" placeholder="Brief summary of the recipe..."
+                    class="w-full px-3.5 py-2.5 bg-slate-900 border border-slate-700 rounded-xl text-white text-xs"></textarea>
+        </div>
+
+        <div>
+          <label class="block font-bold text-slate-300 mb-1">Chef VimShi Pro Tip</label>
+          <input type="text" id="recipeTip" placeholder="Secret technique or advice for success" 
+                 class="w-full px-3.5 py-2.5 bg-slate-900 border border-slate-700 rounded-xl text-white text-xs" />
+        </div>
+
+        <div class="pt-2 flex justify-end gap-3">
+          <button type="button" onclick="closeRecipeModal()" 
+                  class="px-4 py-2.5 bg-slate-700 hover:bg-slate-600 rounded-xl text-xs font-semibold text-slate-200">
+            Cancel
+          </button>
+          <button type="submit" 
+                  class="px-5 py-2.5 bg-orange-600 hover:bg-orange-700 rounded-xl text-xs font-bold text-white uppercase tracking-wider shadow">
+            Save Recipe
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div id="adminToastContainer" class="fixed top-20 right-6 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+  <!-- Admin JavaScript -->
+  <script>
+    let adminRecipes = [];
+    let adminMessages = [];
+    let currentAIMode = 'ai';
+
+    document.addEventListener('DOMContentLoaded', () => {
+      fetchRecipes();
+      fetchMessages();
+      fetchAISettings();
+    });
+
+    // =========================================================
+    // AI AUTOPILOT VS MANUAL MODE LOGIC
+    // =========================================================
+    async function fetchAISettings() {
+      try {
+        const res = await fetch('/api/admin/ai-settings');
+        const settings = await res.json();
+        currentAIMode = settings.mode || 'ai';
+        updateAIModeUI(settings);
+      } catch (e) {
+        console.log('Error fetching AI settings');
+      }
+    }
+
+    function updateAIModeUI(settings) {
+      const mode = settings.mode;
+      const isAI = mode === 'ai';
+      const statusPill = document.getElementById('aiStatusPill');
+      const toggleBtn = document.getElementById('toggleModeBtn');
+      const toggleIcon = document.getElementById('toggleModeIcon');
+      const toggleText = document.getElementById('toggleModeText');
+      const glow = document.getElementById('aiModeGlow');
+      const lastSyncEl = document.getElementById('aiLastSyncTime');
+      const totalSyncedEl = document.getElementById('aiTotalSynced');
+      const logsDrawer = document.getElementById('aiLogsDrawer');
+
+      if (lastSyncEl) lastSyncEl.textContent = settings.last_sync || 'Continuous Auto-Monitoring Active';
+      if (totalSyncedEl) totalSyncedEl.innerHTML = `<i class="fa-solid fa-wand-magic-sparkles mr-1"></i> ${settings.total_ai_synced || 0} recipes auto-created`;
+
+      const geminiInput = document.getElementById('geminiApiKeyInput');
+      const geminiStatus = document.getElementById('geminiKeyStatus');
+      if (settings.has_gemini_key || settings.gemini_api_key) {
+        if (geminiInput && settings.gemini_api_key) geminiInput.value = settings.gemini_api_key;
+        if (geminiStatus) geminiStatus.innerHTML = '<span class="text-emerald-400 font-bold"><i class="fa-solid fa-circle-check mr-1"></i> Gemini AI Active & Connected</span>';
+      } else {
+        if (geminiStatus) geminiStatus.innerHTML = '<span class="text-slate-400"><i class="fa-solid fa-circle-info mr-1"></i> Running fast on-device AI</span>';
+      }
+
+      if (isAI) {
+        if (statusPill) {
+          statusPill.className = 'px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-emerald-950/80 text-emerald-400 border border-emerald-500/40 flex items-center gap-1.5';
+          statusPill.innerHTML = '<i class="fa-solid fa-circle text-[7px] text-emerald-400 animate-pulse"></i> AI Autopilot Mode Active';
+        }
+        if (toggleBtn) {
+          toggleBtn.className = 'px-5 py-3 rounded-2xl font-bold text-xs uppercase tracking-wider shadow-lg transition-all active:scale-95 flex items-center gap-2.5 bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700 text-white';
+        }
+        if (toggleIcon) toggleIcon.className = 'fa-solid fa-pen-ruler text-base';
+        if (toggleText) toggleText.textContent = 'Switch to Manual Mode';
+        if (glow) glow.className = 'absolute -top-20 -right-20 w-80 h-80 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none transition-colors duration-500';
+      } else {
+        if (statusPill) {
+          statusPill.className = 'px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-amber-950/80 text-amber-400 border border-amber-500/40 flex items-center gap-1.5';
+          statusPill.innerHTML = '<i class="fa-solid fa-hand text-[9px] text-amber-400"></i> Manual Mode Active';
+        }
+        if (toggleBtn) {
+          toggleBtn.className = 'px-5 py-3 rounded-2xl font-bold text-xs uppercase tracking-wider shadow-lg transition-all active:scale-95 flex items-center gap-2.5 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white';
+        }
+        if (toggleIcon) toggleIcon.className = 'fa-solid fa-robot text-base';
+        if (toggleText) toggleText.textContent = 'Turn On AI Autopilot';
+        if (glow) glow.className = 'absolute -top-20 -right-20 w-80 h-80 bg-amber-500/10 rounded-full blur-3xl pointer-events-none transition-colors duration-500';
+      }
+
+      // Render logs
+      if (logsDrawer && settings.logs) {
+        if (settings.logs.length === 0) {
+          logsDrawer.innerHTML = '<div class="text-slate-500">No AI sync events recorded yet.</div>';
+        } else {
+          logsDrawer.innerHTML = settings.logs.map(log => `
+            <div class="flex items-start gap-2 pb-1.5 border-b border-slate-800">
+              <span class="text-slate-500 whitespace-nowrap">[${log.timestamp}]</span>
+              <span class="${log.status === 'success' ? 'text-emerald-400' : log.status === 'error' ? 'text-rose-400' : 'text-slate-300'}">
+                ${log.message}
+              </span>
+            </div>
+          `).join('');
+        }
+      }
+    }
+
+    async function handleSaveGeminiKey(e) {
+      e.preventDefault();
+      const key = document.getElementById('geminiApiKeyInput').value.trim();
+      try {
+        const res = await fetch('/api/admin/save-gemini-key', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ gemini_api_key: key })
+        });
+        const result = await res.json();
+        if (result.success) {
+          showAdminToast('✨ Google Gemini API Key saved & activated!', 'success');
+          fetchAISettings();
+        } else {
+          showAdminToast(result.error || 'Failed to save key', 'error');
+        }
+      } catch (err) {
+        showAdminToast('Error saving Gemini key', 'error');
+      }
+    }
+
+    async function toggleAIMode() {
+      try {
+        const res = await fetch('/api/admin/toggle-mode', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' }
+        });
+        const result = await res.json();
+        if (result.success) {
+          currentAIMode = result.mode;
+          updateAIModeUI(result.settings);
+          showAdminToast(
+            currentAIMode === 'ai' 
+              ? '🤖 AI Autopilot turned ON! Watching YouTube, Instagram & Facebook feeds.' 
+              : '✍️ Manual Mode turned ON! AI auto-publishing paused.', 
+            'success'
+          );
+        }
+      } catch (e) {
+        showAdminToast('Failed to switch mode', 'error');
+      }
+    }
+
+    async function triggerAISync() {
+      const btn = document.getElementById('syncNowBtn');
+      const icon = document.getElementById('syncIcon');
+      if (icon) icon.className = 'fa-solid fa-rotate-right fa-spin text-amber-400';
+      if (btn) btn.disabled = true;
+
+      showAdminToast('Scanning YouTube, Instagram & Facebook feeds...', 'info');
+
+      try {
+        const res = await fetch('/api/admin/ai-sync-now', {
+          method: 'POST'
+        });
+        const result = await res.json();
+        if (result.success) {
+          if (result.new_count > 0) {
+            showAdminToast(`🎉 AI ingested ${result.new_count} new video recipe(s)!`, 'success');
+            fetchRecipes(); // Refresh recipe list
+          } else {
+            showAdminToast('Feeds scanned: All video recipes are up-to-date!', 'info');
+          }
+          fetchAISettings(); // Refresh logs & timestamp
+        } else {
+          showAdminToast(`Sync error: ${result.error}`, 'error');
+        }
+      } catch (e) {
+        showAdminToast('Network error during AI scan', 'error');
+      } finally {
+        if (icon) icon.className = 'fa-solid fa-bolt text-amber-400';
+        if (btn) btn.disabled = false;
+      }
+    }
+
+    function switchTab(tab) {
+      document.querySelectorAll('[id^="section-"]').forEach(el => el.classList.add('hidden'));
+      document.querySelectorAll('.admin-tab-btn').forEach(btn => {
+        btn.classList.remove('bg-orange-600', 'text-white');
+        btn.classList.add('text-slate-400');
+      });
+
+      const section = document.getElementById(`section-${tab}`);
+      const btn = document.getElementById(`tabBtn-${tab}`);
+      if (section) section.classList.remove('hidden');
+      if (btn) {
+        btn.classList.add('bg-orange-600', 'text-white');
+        btn.classList.remove('text-slate-400');
+      }
+    }
+
+    // =========================================================
+    // RECIPES LOGIC
+    // =========================================================
+    async function fetchRecipes() {
+      try {
+        const res = await fetch('/api/recipes');
+        adminRecipes = await res.json();
+        document.getElementById('statRecipeCount').textContent = adminRecipes.length;
+        renderAdminRecipes(adminRecipes);
+      } catch (e) {
+        showAdminToast('Failed to load recipes', 'error');
+      }
+    }
+
+    function renderAdminRecipes(list) {
+      const container = document.getElementById('adminRecipesList');
+      if (!container) return;
+
+      if (list.length === 0) {
+        container.innerHTML = '<div class="col-span-full py-8 text-center text-slate-500 text-xs">No recipes found.</div>';
+        return;
+      }
+
+      container.innerHTML = list.map(r => `
+        <div class="p-4 rounded-2xl bg-slate-800 border border-slate-700/80 flex flex-col justify-between">
+          <div class="flex items-start gap-3">
+            <img src="https://i.ytimg.com/vi/${r.id}/hqdefault.jpg" alt="${r.title}" 
+                 class="w-16 h-12 object-cover rounded-lg shrink-0 bg-black" />
+            <div class="flex-1 min-w-0">
+              <span class="inline-block px-2 py-0.5 rounded text-[10px] font-bold bg-orange-500/20 text-orange-400 uppercase">
+                ${r.categoryName || r.category}
+              </span>
+              <h4 class="font-bold text-sm text-white truncate mt-1">${r.title}</h4>
+              <p class="text-[11px] text-slate-400">${r.duration || '20m'} • ${r.diet || 'Pure Veg'}</p>
+            </div>
+          </div>
+
+          <div class="mt-4 pt-3 border-t border-slate-700/60 flex items-center justify-between">
+            <span class="text-[10px] text-amber-400 font-semibold">${r.badge || ''}</span>
+            <div class="flex items-center gap-2">
+              <button onclick="editRecipe('${r.id}')" class="px-2.5 py-1 rounded-lg bg-slate-700 hover:bg-slate-600 text-slate-200 text-xs">
+                <i class="fa-solid fa-pen-to-square"></i> Edit
+              </button>
+              <button onclick="deleteRecipe('${r.id}')" class="px-2.5 py-1 rounded-lg bg-rose-600/20 hover:bg-rose-600 text-rose-300 hover:text-white text-xs">
+                <i class="fa-solid fa-trash"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function filterAdminRecipes() {
+      const q = document.getElementById('adminRecipeSearch').value.toLowerCase();
+      const filtered = adminRecipes.filter(r => r.title.toLowerCase().includes(q) || (r.hindiTitle && r.hindiTitle.toLowerCase().includes(q)));
+      renderAdminRecipes(filtered);
+    }
+
+    function openRecipeModal(recipe = null) {
+      const modal = document.getElementById('recipeFormModal');
+      const heading = document.getElementById('recipeModalHeading');
+      const form = document.getElementById('recipeEditForm');
+      form.reset();
+
+      if (recipe) {
+        heading.textContent = 'Edit Recipe';
+        document.getElementById('editRecipeId').value = recipe.id;
+        document.getElementById('recipeTitle').value = recipe.title;
+        document.getElementById('recipeHindiTitle').value = recipe.hindiTitle || '';
+        document.getElementById('recipeCategory').value = recipe.category || 'sweets';
+        document.getElementById('recipeBadge').value = recipe.badge || '';
+        document.getElementById('recipeDiet').value = recipe.diet || 'Pure Vegetarian';
+        document.getElementById('recipeVideoId').value = recipe.id;
+        document.getElementById('recipeDuration').value = recipe.duration || '';
+        document.getElementById('recipePrep').value = recipe.prepTime || '';
+        document.getElementById('recipeCook').value = recipe.cookTime || '';
+        document.getElementById('recipeDesc').value = recipe.description || '';
+        document.getElementById('recipeTip').value = recipe.chefTip || '';
+      } else {
+        heading.textContent = 'Add New Recipe';
+        document.getElementById('editRecipeId').value = '';
+      }
+
+      modal.classList.remove('hidden');
+    }
+
+    function closeRecipeModal() {
+      document.getElementById('recipeFormModal').classList.add('hidden');
+    }
+
+    function editRecipe(id) {
+      const r = adminRecipes.find(item => item.id === id);
+      if (r) openRecipeModal(r);
+    }
+
+    async function handleRecipeSubmit(e) {
+      e.preventDefault();
+      const id = document.getElementById('editRecipeId').value || document.getElementById('recipeVideoId').value.trim();
+      const category = document.getElementById('recipeCategory').value;
+      const catNames = {
+        sweets: 'Sweets & Desserts',
+        healthy: 'Zero-Oil & Healthy',
+        curries: 'Curries & Gravies',
+        baking: 'Snacks & Baking',
+        regional: 'Regional & Heritage'
+      };
+
+      const recipeData = {
+        id: id,
+        title: document.getElementById('recipeTitle').value.trim(),
+        hindiTitle: document.getElementById('recipeHindiTitle').value.trim(),
+        category: category,
+        categoryName: catNames[category] || 'Specialty',
+        badge: document.getElementById('recipeBadge').value.trim() || 'Chef Special',
+        diet: document.getElementById('recipeDiet').value.trim() || 'Pure Vegetarian',
+        duration: document.getElementById('recipeDuration').value.trim() || '25 mins',
+        prepTime: document.getElementById('recipePrep').value.trim() || '10 mins',
+        cookTime: document.getElementById('recipeCook').value.trim() || '15 mins',
+        difficulty: 'Easy',
+        rating: 5.0,
+        views: 'New Upload',
+        published: 'Just now',
+        description: document.getElementById('recipeDesc').value.trim(),
+        servings: 4,
+        ingredients: [
+          { amount: 1, unit: "standard", name: "Fresh Cooking Ingredients (See Video)" }
+        ],
+        steps: [
+          "Follow the full visual tutorial provided by Chef VimShi in the video player above."
+        ],
+        chefTip: document.getElementById('recipeTip').value.trim() || 'Cook with patience on gentle flame for authentic flavors.'
+      };
+
+      try {
+        const res = await fetch('/api/admin/recipes', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(recipeData)
+        });
+        const result = await res.json();
+        if (result.success) {
+          showAdminToast('Recipe saved successfully!', 'success');
+          closeRecipeModal();
+          fetchRecipes();
+        } else {
+          showAdminToast(result.error || 'Failed to save', 'error');
+        }
+      } catch (err) {
+        showAdminToast('Server error while saving recipe', 'error');
+      }
+    }
+
+    async function deleteRecipe(id) {
+      if (!confirm('Are you sure you want to delete this recipe?')) return;
+      try {
+        const res = await fetch(`/api/admin/recipes/${id}`, { method: 'DELETE' });
+        const result = await res.json();
+        if (result.success) {
+          showAdminToast('Recipe deleted', 'info');
+          fetchRecipes();
+        }
+      } catch (e) {
+        showAdminToast('Failed to delete recipe', 'error');
+      }
+    }
+
+    // =========================================================
+    // MESSAGES LOGIC
+    // =========================================================
+    async function fetchMessages() {
+      try {
+        const res = await fetch('/api/admin/messages');
+        adminMessages = await res.json();
+        document.getElementById('statMessageCount').textContent = adminMessages.length;
+        document.getElementById('inboxBadge').textContent = adminMessages.length;
+        renderMessages(adminMessages);
+      } catch (e) {
+        console.log('Error fetching messages');
+      }
+    }
+
+    function renderMessages(messages) {
+      const container = document.getElementById('messagesList');
+      if (!container) return;
+
+      if (messages.length === 0) {
+        container.innerHTML = `
+          <div class="p-8 text-center bg-slate-800/60 rounded-2xl border border-slate-700/60 text-slate-400 text-xs">
+            <i class="fa-solid fa-inbox text-3xl mb-2 text-slate-500"></i>
+            <p>Your inbox is currently clear. Messages submitted through the contact form will appear here.</p>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = messages.map(m => `
+        <div class="p-4 rounded-2xl bg-slate-800 border border-slate-700/80 flex flex-col sm:flex-row sm:items-start justify-between gap-3">
+          <div class="space-y-1 flex-1">
+            <div class="flex items-center gap-2">
+              <span class="font-bold text-sm text-white">${m.name}</span>
+              <span class="text-[11px] text-slate-400">&lt;${m.email}&gt;</span>
+              <span class="px-2 py-0.5 rounded text-[10px] bg-orange-600/30 text-orange-400 font-semibold uppercase">${m.inquiry_type || 'General'}</span>
+            </div>
+            <p class="text-xs text-slate-300 leading-relaxed pt-1">${m.message}</p>
+            <span class="text-[10px] text-slate-500 block pt-1"><i class="fa-regular fa-clock mr-1"></i>${m.created_at || 'Recently'}</span>
+          </div>
+          <button onclick="deleteMessage('${m.id}')" class="self-end sm:self-start px-2.5 py-1 bg-rose-600/20 hover:bg-rose-600 text-rose-300 hover:text-white rounded-lg text-xs transition-colors">
+            <i class="fa-solid fa-trash"></i>
+          </button>
+        </div>
+      `).join('');
+    }
+
+    async function deleteMessage(id) {
+      if (!confirm('Delete this message?')) return;
+      try {
+        const res = await fetch(`/api/admin/messages/${id}`, { method: 'DELETE' });
+        const result = await res.json();
+        if (result.success) {
+          showAdminToast('Message deleted', 'info');
+          fetchMessages();
+        }
+      } catch (e) {
+        showAdminToast('Failed to delete message', 'error');
+      }
+    }
+
+    // =========================================================
+    // CHANGE PASSWORD LOGIC
+    // =========================================================
+    async function handlePasswordChange(e) {
+      e.preventDefault();
+      const currentPassword = document.getElementById('currentPassword').value;
+      const newPassword = document.getElementById('newPassword').value;
+      const confirmNewPassword = document.getElementById('confirmNewPassword').value;
+
+      if (newPassword !== confirmNewPassword) {
+        showAdminToast('New passwords do not match!', 'error');
+        return;
+      }
+
+      try {
+        const res = await fetch('/api/admin/change-password', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ currentPassword, newPassword })
+        });
+        const result = await res.json();
+        if (result.success) {
+          showAdminToast('Password updated & securely encrypted!', 'success');
+          document.getElementById('changePasswordForm').reset();
+        } else {
+          showAdminToast(result.error || 'Failed to update password', 'error');
+        }
+      } catch (err) {
+        showAdminToast('Error updating password', 'error');
+      }
+    }
+
+    // Toast
+    function showAdminToast(msg, type = 'info') {
+      const container = document.getElementById('adminToastContainer');
+      if (!container) return;
+      const toast = document.createElement('div');
+      const bg = type === 'success' ? 'bg-emerald-600' : type === 'error' ? 'bg-rose-600' : 'bg-slate-800';
+      toast.className = `${bg} text-white px-4 py-2.5 rounded-xl shadow-xl text-xs font-semibold flex items-center gap-2`;
+      toast.innerHTML = `<span>${msg}</span>`;
+      container.appendChild(toast);
+      setTimeout(() => toast.remove(), 3000);
+    }
+  </script>
+</body>
+</html>
